@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import mongoose from "mongoose";
 
-import { UserInterface } from "../interfaces/userInterface";
+import { UserInstanceMethods, UserInterface } from "../interfaces/userInterface";
 
 const UserSchema = new mongoose.Schema<UserInterface>({
     username:{
@@ -36,4 +36,4 @@ UserSchema.methods.comparePassword = async function (
 	return isMatch;
 };
 
-export default mongoose.model<UserInterface>("User", UserSchema);
+export default mongoose.model<UserInterface & UserInstanceMethods>("User", UserSchema);
