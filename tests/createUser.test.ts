@@ -1,5 +1,5 @@
-import app from "../app";
 import request from "supertest";
+import app from "../app";
 import mongo from "../src/db/mongo";
 
 
@@ -24,10 +24,7 @@ describe("Creating user test", () => {
       await request(app)
         .post("/auth/createUser")
         .send(userData)
-        .expect(201)
-        .end(function (err, res) {
-          if (err) throw err;
-        });
+        .expect(201);  
     });
   });
 });
