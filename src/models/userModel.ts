@@ -27,7 +27,7 @@ UserSchema.pre("save", async function (next) {
     return next();
   });
 
-//compare passwords during auth
+//compare passwords during sign in
 UserSchema.methods.comparePassword = async function (
 	password: string
 ): Promise<boolean> {
