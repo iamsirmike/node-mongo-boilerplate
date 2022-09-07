@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.ts",
+    "start": "tsc -p . && node dist/server.js",
     "watch": "nodemon server.ts",
     "test": "jest"
   },
