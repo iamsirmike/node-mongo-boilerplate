@@ -2,8 +2,6 @@ import request from "supertest";
 import app from "../app";
 import mongo from "../src/db/mongo";
 
-
-
 describe("Creating user test", () => {
   beforeAll(async () => {
     await mongo.mongoConnect();
@@ -21,10 +19,7 @@ describe("Creating user test", () => {
         password: "12345",
         age: 20,
       };
-      await request(app)
-        .post("/auth/createUser")
-        .send(userData)
-        .expect(201);  
+      await request(app).post("/auth/createUser").send(userData).expect(201);
     });
   });
 });
