@@ -3,7 +3,7 @@ import express, { json } from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 
-import userRouter from "./src/routes/userRoute";
+import userRouter from "./src/routes/authRoute";
 
 
 dotenv.config();
