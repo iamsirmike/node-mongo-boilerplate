@@ -26,7 +26,12 @@ export const createUser = async (req: any, res: Response) =>{
    const userToken: string = generateToken(user);
 
 
-   res.send(CustomResponse.responseWithData(201, "User created", {userToken, user: user}));
+   res.send(CustomResponse.responseWithData(201, "User created", {
+    userToken: userToken,
+    username: user.username,
+    fullname: user.fullname,
+    age: user.age,
+   }));
 
     
 }
