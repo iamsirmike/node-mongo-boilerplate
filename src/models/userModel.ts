@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema<UserInterface>({
 UserSchema.pre("save", async function (next) {
     const user = this as UserInterface;
     const hash = await bcrypt.hash(user.password, 10);
-  
+
     this.password = hash;
     return next();
   });
@@ -35,9 +35,7 @@ UserSchema.pre("save", async function (next) {
 UserSchema.methods.comparePassword = async function (
 	password: string
 ): Promise<boolean> {
-	const user = this;
-	const isMatch = bcrypt.compare(password, user.password);
-	return isMatch;
+	return bcrypt.compare(password, this.password);
 };
 
 export default mongoose.model<UserInterface & UserInstanceMethods>("User", UserSchema);
