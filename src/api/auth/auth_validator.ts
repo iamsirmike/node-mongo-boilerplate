@@ -1,6 +1,6 @@
 import joi from "joi";
-import { joiValidator } from "../helpers/joiValidator";
-import { UserInterface } from "../interfaces/userInterface";
+import { joiValidator } from "../../helpers/joi_validator";
+import { UserInterface } from "../../interfaces/user_interface";
 
 export const createAccountValidator = async (data: UserInterface) => {
   const joiObject = joi.object({

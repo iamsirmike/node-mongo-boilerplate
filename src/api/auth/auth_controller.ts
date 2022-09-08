@@ -1,26 +1,31 @@
 import { Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import generateToken from "../helpers/jwt";
-import { CustomResponse } from "../helpers/response";
-import { UserInterface } from "../interfaces/userInterface";
-import UserModel from "../models/userModel";
-import { createAccountValidator } from "../validators/createUserValidator";
+import generateToken from "../../helpers/jwt";
+import { CustomResponse } from "../../helpers/response";
+import { UserInterface } from "../../interfaces/user_interface";
+import UserModel from "../../models/user_model";
+import { createAccountValidator } from "./auth_validator";
 
-export const createUser = async (req: any, res: Response) => {
+export const createAccount = async (req: any, res: Response) => {
   const requestBody: UserInterface = req.body;
 
   const validateInput = await createAccountValidator(requestBody);
 
   //There is a validation error when true
   if (validateInput) {
-    return res.send(CustomResponse.responseWithoutData(StatusCodes.BAD_REQUEST, validateInput));
+    return res.send(
+      CustomResponse.responseWithoutData(StatusCodes.BAD_REQUEST, validateInput)
+    );
   }
 
   const userExist = await UserModel.findOne({ username: requestBody.username });
 
   if (userExist) {
     return res.send(
-      CustomResponse.responseWithoutData(StatusCodes.BAD_REQUEST, "Username already exist")
+      CustomResponse.responseWithoutData(
+        StatusCodes.BAD_REQUEST,
+        "Username already exist"
+      )
     );
   }
 

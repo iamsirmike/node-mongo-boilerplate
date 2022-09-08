@@ -1,6 +1,6 @@
 import request from "supertest";
-import app from "../app";
-import mongo from "../src/db/mongo";
+import app from "../../../app";
+import mongo from "../../db/mongo";
 
 describe("Creating user test", () => {
   beforeAll(async () => {

@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import {
   UserInstanceMethods,
   UserInterface,
-} from "../interfaces/userInterface";
+} from "../interfaces/user_interface";
 
 const UserSchema = new mongoose.Schema<UserInterface>({
   username: {
