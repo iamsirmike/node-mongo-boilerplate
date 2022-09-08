@@ -9,16 +9,24 @@ mongoose.connection.once("open", () => {
   console.log("Mongo connection is ready!");
 });
 
-mongoose.connection.on("err", () => {
-  console.error("Mongo connection error!");
+mongoose.connection.on("err", (err) => {
+  console.log("mongo error: " + err.toString());
 });
 
 async function mongoConnect() {
-  await mongoose.connect(MONGO_URL);
+  try {
+    await mongoose.connect(MONGO_URL);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function mongoDisconnect() {
-  await mongoose.disconnect();
+  try {
+    await mongoose.disconnect();
+  } catch (error) {
+    console.log;
+  }
 }
 
 export default {
