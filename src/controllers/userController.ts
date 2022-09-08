@@ -1,4 +1,5 @@
 import { Response } from "express";
+import { StatusCodes } from "http-status-codes";
 import generateToken from "../helpers/jwt";
 import { CustomResponse } from "../helpers/response";
 import { UserInterface } from "../interfaces/userInterface";
@@ -12,14 +13,14 @@ export const createUser = async (req: any, res: Response) => {
 
   //There is a validation error when true
   if (validateInput) {
-    return res.send(CustomResponse.responseWithoutData(400, validateInput));
+    return res.send(CustomResponse.responseWithoutData(StatusCodes.BAD_REQUEST, validateInput));
   }
 
   const userExist = await UserModel.findOne({ username: requestBody.username });
 
   if (userExist) {
     return res.send(
-      CustomResponse.responseWithoutData(401, "Username already exist")
+      CustomResponse.responseWithoutData(StatusCodes.BAD_REQUEST, "Username already exist")
     );
   }
 
@@ -28,7 +29,7 @@ export const createUser = async (req: any, res: Response) => {
   const userToken: string = generateToken(user);
 
   res.send(
-    CustomResponse.responseWithData(201, "User created", {
+    CustomResponse.responseWithData(StatusCodes.CREATED, "User created", {
       userToken: userToken,
       username: user.username,
       fullname: user.fullname,

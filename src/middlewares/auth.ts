@@ -1,15 +1,16 @@
+import { StatusCodes } from "http-status-codes";
 import pkg from "jsonwebtoken";
 const { verify } = pkg;
 
 const verifyToken = (req: any, res: any, next: any) => {
   if (req.headers.authorization.length < 1) {
-    return res.status(400).send("Invalid request");
+    return res.status(StatusCodes.BAD_REQUEST).send("Invalid request");
   }
 
   const token = req.headers.authorization.split(" ")[1];
 
   if (!token) {
-    return res.status(400).send("No user token provided");
+    return res.status(StatusCodes.BAD_REQUEST).send("No user token provided");
   }
   try {
     const decoded = verify(token, process.env.JWT_TOKEN || "RandomTokenKey");

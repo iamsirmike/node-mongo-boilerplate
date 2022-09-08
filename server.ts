@@ -4,7 +4,6 @@
 
 import { createServer, Server } from "http";
 
-
 import app from "./app";
 import mongo from "./src/db/mongo";
 
@@ -14,11 +13,15 @@ const PORT = process.env.PORT || 6000;
 const server: Server = createServer(app);
 
 async function startServer() {
-  await mongo.mongoConnect();
+  try {
+    await mongo.mongoConnect();
 
-  server.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}...`);
-  });
+    server.listen(PORT, () => {
+      console.log(`Server is listening on port ${PORT}...`);
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 startServer();
