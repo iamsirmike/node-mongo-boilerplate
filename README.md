@@ -28,3 +28,13 @@ Replace `<url>` with the actual url.
     - To run tests `npm run test`
 
 Now you are ready to rumble!
+
+## Docker
+
+To get this built and running as a [docker](https://docs.docker.com/get-started/) container, run the following commands.
+(You need [docker installed](https://docs.docker.com/get-started/#download-and-install-docker) for this)
+
+```bash
+docker build . -t node-mongo-boilerplate:latest
+docker run -p 6000:6000 -d node-mongo-boilerplate:latest
+```
